@@ -30,7 +30,7 @@ public class Customer {
             double thisAmount = 0;
             Rental each = (Rental) elements.nextElement();
 
-            thisAmount = amountFor(each);
+            thisAmount = each.getCharge();
 
             frequentRenterPoints ++;
 
@@ -48,9 +48,6 @@ public class Customer {
         result += "总计消费: " + String.valueOf(totalAmount) + "\n";
         result += "你将获得: " + String.valueOf(frequentRenterPoints) + " 的积分";
         return result;
-    }
-    double amountFor( Rental aRental ){
-        return aRental.getCharge();
     }
 
 }
