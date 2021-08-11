@@ -27,10 +27,7 @@ public class Customer {
         String result = "记录顾客: " + getName() + "\n";
         while (elements.hasMoreElements()) {
 
-            double thisAmount = 0;
             Rental each = (Rental) elements.nextElement();
-
-            thisAmount = each.getCharge();
 
             frequentRenterPoints ++;
 
@@ -40,9 +37,9 @@ public class Customer {
             }
 
             result += "\t" + each.getMovie().getTitle() + "\t"
-                    + String.valueOf(thisAmount) + "\n";
+                    + String.valueOf(each.getCharge()) + "\n";
 
-            totalAmount += thisAmount;
+            totalAmount += each.getCharge();
         }
 
         result += "总计消费: " + String.valueOf(totalAmount) + "\n";
