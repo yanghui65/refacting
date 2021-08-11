@@ -26,26 +26,11 @@ public class Customer {
         Enumeration elements = rentals.elements();
         String result = "记录顾客: " + getName() + "\n";
         while (elements.hasMoreElements()) {
+
             double thisAmount = 0;
             Rental each = (Rental) elements.nextElement();
 
-            switch (each.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.getDayRented() > 2) {
-                        thisAmount += (each.getDayRented() - 2) * 1.5;
-                    }
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += each.getDayRented() * 3;
-                    break;
-                case Movie.CHILDREN:
-                    thisAmount += 1.5;
-                    if (each.getDayRented() > 3) {
-                        thisAmount += (each.getDayRented() - 3) * 1.5;
-                        break;
-                    }
-            }
+            thisAmount = amountFor(each);
 
             frequentRenterPoints ++;
 
@@ -64,6 +49,29 @@ public class Customer {
         result += "你将获得: " + String.valueOf(frequentRenterPoints) + " 的积分";
         return result;
     }
+    double amountFor( Rental aRental ){
+        double result = 0;
+
+        switch (aRental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                result += 2;
+                if (aRental.getDayRented() > 2) {
+                    result += (aRental.getDayRented() - 2) * 1.5;
+                }
+                break;
+            case Movie.NEW_RELEASE:
+                result += aRental.getDayRented() * 3;
+                break;
+            case Movie.CHILDREN:
+                result += 1.5;
+                if (aRental.getDayRented() > 3) {
+                    result += (aRental.getDayRented() - 3) * 1.5;
+                    break;
+                }
+        }
+        return result;
+    }
+
 }
 
 
