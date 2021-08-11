@@ -1,8 +1,12 @@
+import java.util.Vector;
+import java.util.List;
+import java.util.Iterator;
+import java.util.Enumeration;
 public class Customer {
 
     private String name;
 
-    private Vector rentals = new Vector();
+    private Vector<Rental> rentals = new Vector<Rental>();
 
     public Customer(String name) {
         this.name = name;
