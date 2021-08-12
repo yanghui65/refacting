@@ -19,28 +19,50 @@ public class Customer {
     public void addRental(Rental arg) {
         rentals.addElement(arg);
     }
-
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
         Enumeration elements = rentals.elements();
         String result = "记录顾客: " + getName() + "\n";
         while (elements.hasMoreElements()) {
 
             Rental each = (Rental) elements.nextElement();
 
-            frequentRenterPoints += each.getFrequentRenterPoints();
-
             result += "\t" + each.getMovie().getTitle() + "\t"
                     + String.valueOf(each.getCharge()) + "\n";
 
-            totalAmount += each.getCharge();
         }
 
-        result += "总计消费: " + String.valueOf(totalAmount) + "\n";
-        result += "你将获得: " + String.valueOf(frequentRenterPoints) + " 的积分";
+        result += "总计消费: " + String.valueOf(getTotalCharge()) + "\n";
+        result += "你将获得: " + String.valueOf(getTotalFrequentRenterPoints()) + " 的积分";
         return result;
     }
+
+    private double getTotalCharge(){
+        double result = 0;
+        Enumeration elements = rentals.elements();
+
+        while (elements.hasMoreElements()) {
+
+            Rental each = (Rental) elements.nextElement();
+
+            result += each.getCharge();
+        }
+        return result;
+    }
+
+    private int getTotalFrequentRenterPoints(){
+        int result = 0;
+        Enumeration elements = rentals.elements();
+
+        while (elements.hasMoreElements()) {
+
+            Rental each = (Rental) elements.nextElement();
+
+            result += each.getFrequentRenterPoints();
+        }
+        return result;
+
+    }
+
 
 }
 
