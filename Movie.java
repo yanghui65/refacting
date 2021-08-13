@@ -10,6 +10,11 @@ public class Movie {
 
     private int priceCode;
 
+    public Movie(String title, int priceCode){
+        this.title = title;
+        setPriceCode(priceCode);
+    }
+
     public String getTitle() {
         return title;
     }
