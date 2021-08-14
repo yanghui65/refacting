@@ -8,6 +8,11 @@ public class Customer {
 
     private Vector<Rental> rentals = new Vector<Rental>();
 
+    public Enumeration getRentals(){
+        return rentals.elements();
+    }
+
+
     public Customer(String name) {
         this.name = name;
     }
@@ -20,23 +25,14 @@ public class Customer {
         rentals.addElement(arg);
     }
     public String statement() {
-        Enumeration elements = rentals.elements();
-        String result = "记录顾客: " + getName() + "\n";
-        while (elements.hasMoreElements()) {
-
-            Rental each = (Rental) elements.nextElement();
-
-            result += "\t" + each.getMovie().getTitle() + "\t"
-                    + String.valueOf(each.getCharge()) + "\n";
-
-        }
-
-        result += "总计消费: " + String.valueOf(getTotalCharge()) + "\n";
-        result += "你将获得: " + String.valueOf(getTotalFrequentRenterPoints()) + " 的积分";
-        return result;
+        return new TextStatement().value(this);
+    }
+    public String htmlStatement() {
+        return new HtmlStatement().value(this);
     }
 
-    private double getTotalCharge(){
+
+    public double getTotalCharge(){
         double result = 0;
         Enumeration elements = rentals.elements();
 
@@ -49,7 +45,7 @@ public class Customer {
         return result;
     }
 
-    private int getTotalFrequentRenterPoints(){
+    public int getTotalFrequentRenterPoints(){
         int result = 0;
         Enumeration elements = rentals.elements();
 
