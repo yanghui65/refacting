@@ -3,7 +3,25 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.Enumeration;
 
-class Statement{
+abstract class Statement{
+    public String value( Customer aCustomer ){
+        Enumeration elements = aCustomer.getRentals();
+        String result = headString( aCustomer );
+        while (elements.hasMoreElements()) {
+
+            Rental each = (Rental) elements.nextElement();
+
+            result += eachRentalString( each );
+
+        }
+        result += footerString( aCustomer );
+
+        return result;
+
+    }
+    abstract String headString( Customer aCustomer );
+    abstract String eachRentalString( Rental aRental );
+    abstract String footerString( Customer aCustomer );
 
 }
 
@@ -20,21 +38,6 @@ class TextStatement extends Statement{
         return "总计消费: " + String.valueOf(aCustomer.getTotalCharge()) + "\n" + "你将获得: " + String.valueOf(aCustomer.getTotalFrequentRenterPoints()) + " 的积分";
     }
 
-    public String value( Customer aCustomer ){
-        Enumeration elements = aCustomer.getRentals();
-        String result = headString( aCustomer );
-        while (elements.hasMoreElements()) {
-
-            Rental each = (Rental) elements.nextElement();
-
-            result += eachRentalString( each );
-
-        }
-        result += footerString( aCustomer );
-
-        return result;
-
-    }
 
 }
 
@@ -51,18 +54,5 @@ class HtmlStatement extends Statement{
     String footerString( Customer aCustomer ){
 
         return "<P>总计消费: <EM>" + String.valueOf(aCustomer.getTotalCharge()) + "</EM><P>\n" + "你将获得: <EM>" + String.valueOf(aCustomer.getTotalFrequentRenterPoints()) + "</EM> 的积分";
-    }
-    public String value( Customer aCustomer ){
-        Enumeration elements = aCustomer.getRentals();
-        String result = headString( aCustomer );
-        while (elements.hasMoreElements()) {
-
-            Rental each = (Rental) elements.nextElement();
-
-            result += eachRentalString( each );
-        }
-        result += footerString( aCustomer );
-        return result;
-
     }
 }
